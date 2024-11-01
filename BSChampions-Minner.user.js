@@ -342,7 +342,7 @@ function purge(elements) {
 <div id="autobsc-overlay" style="position: absolute; top: 20%; z-index: 99999999; background: antiquewhite">
 <details>
 <summary style="list-style: none;" id="autobsc-overlayheader" onclick="if (getAttribute('drag') === '') event.preventDefault()">
-  <div style="padding: 1rem;">AutoBSC++</div>
+  <div style="padding: 1rem;">BSChampions Minner</div>
 </summary>
 
 <div style="display: grid; justify-content: center; margin-bottom: .5rem;">
