@@ -363,17 +363,17 @@ function purge(elements) {
 
   <div class="autobsc-config-container">Answer polls <input type="checkbox" id="autobsc-poll"></div>
 
-  <div class="autobsc-config-container">Answer quiz <input type="checkbox" id="autobsc-quiz"></div>
+  <div class="autobsc-config-container">Answer Quiz <input type="checkbox" id="autobsc-quiz"></div>
 
-  <div class="autobsc-config-container">Collect lootdrop <input type="checkbox" id="autobsc-lootdrop"></div>
+  <div class="autobsc-config-container">Collect Lootdrop <input type="checkbox" id="autobsc-lootdrop"></div>
 
   <div class="autobsc-config-container">Autopredict <input type="checkbox" id="autobsc-predict"></div>
 
-  <div class="autobsc-config-container">Autopredict strategy <select style="width: 3.825rem;" id="autobsc-predict-strat">
+  <div class="autobsc-config-container">Autopredict Strategy <select style="width: 3.825rem;" id="autobsc-predict-strat">
   <option value="1">Blue</option>
   <option value="2">Red</option>
   <option value="rand">Random</option>
-  <option value="maj">Follow majority</option>
+  <option value="maj">Follow Majority</option>
 </select></div>
 
   <div class="autobsc-config-container">Feed logging <input type="checkbox" id="autobsc-feedlogging"></div>
