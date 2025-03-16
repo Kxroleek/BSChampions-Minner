@@ -1,22 +1,19 @@
 // ==UserScript==
-// @name         BSChampions Minner
+// @name         ChampBot
 // @namespace    https://github.com/Kxroleek
-// @homepageURL  https://github.com/Kxroleek/BSChampions-Minner
-// @supportURL   https://e-z/bio/Kxroleek
+// @homepageURL  https://github.com/Kxroleek/ChampBot
+// @supportURL   https://e-z.bio/kxroleek
 // @license      MIT
-// @version      0.2.1
-// @description  Auto Completes Brawl Stars Championship
+// @version      0.2.2
+// @description  Automation tool that helps earn points in the Brawl Stars Championship on the Supercell website by completing live event tasks.
 // @author       Kxroleek
 // @match        https://event.supercell.com/brawlstars/*
 // @icon         https://event.supercell.com/brawlstars/page-icon.ico
 // @grant        none
 // ==/UserScript==
 
-// ==================== Begin BSChampions Minner Configuration ====================
-// This is the default configuration
-
 function load(key, def) {
-    let res = localStorage.getItem("autobsc-" + key)
+    let res = localStorage.getItem("ChampBot-" + key)
 
     if (res === null) {
         store(key, def)
@@ -27,10 +24,10 @@ function load(key, def) {
 }
 
 function store(key, val) {
-    localStorage.setItem("autobsc-"+key, JSON.stringify(val))
+    localStorage.setItem("ChampBot-"+key, JSON.stringify(val))
 }
 
-// ==================== Begin AutoBSC Configuration ====================
+// ==================== Begin ChampBot Configuration ====================
 // This is the default configuration
 // load(config_key, default_value)
 // Do not change the config key unless you know what you are doing
@@ -67,7 +64,7 @@ let lowDetail = load("lowDetail", false);
 // Debug logging of websocket messages to console
 let debug = false;
 
-// ===================== End AutoBSC Configuration =====================
+// ===================== End ChampBot Configuration =====================
 
 let feed;
 
@@ -106,7 +103,7 @@ function purge(elements) {
         try {
             elem.remove()
         } catch (e) {
-            console.warn("[AutoBSC] Failed to remove element", elem, e)
+            console.warn("[ChampBot] Failed to remove element", elem, e)
         }
     }
 }
@@ -159,7 +156,7 @@ function purge(elements) {
         if (debug) {
           const parsed = JSON.parse(data);
 
-          console.log("[AutoBSC] Sending message:", data, parsed);
+          console.log("[ChampBot] Sending message:", data, parsed);
         }
         originalSend.call(this, data);
       };
@@ -171,7 +168,7 @@ function purge(elements) {
   function parse(data, ws) {
     const msg = JSON.parse(data)
     if (debug) {
-      console.log("[AutoBSC] Received message:", msg, data);
+      console.log("[ChampBot] Received message:", msg, data);
     }
 
     msg.forEach(event => {
@@ -212,7 +209,7 @@ function purge(elements) {
                 que.getElementsByTagName("button")[0].click()
               }
             } catch (e) {
-              console.error("[AutoBSC]", e)
+              console.error("[ChampBot]", e)
             }
           }, 3500);
           lastPollId = event.payload.typeId;
@@ -221,7 +218,7 @@ function purge(elements) {
 
       if (messageType === "quiz" && quizEnabled) {
         if (event.payload.typeId !== lastQuizId) {
-          log("Sending quiz");
+          log("Sending Quiz");
 
           setTimeout(() => {
             for (let que of document.getElementsByClassName("BaseCard")) {
@@ -232,7 +229,7 @@ function purge(elements) {
 
                 que.getElementsByClassName("MultiChoiceQuestionCard__button")[event.payload.correctAnswer.alternative].click()
               } catch (e) {
-                console.error("[AutoBSC]", e)
+                console.error("[ChampBot]", e)
               }
             }
           }, 3500);
@@ -274,7 +271,7 @@ function purge(elements) {
               try {
                 a.getElementsByTagName("button")[team].click()
               } catch (e) {
-                console.error("[AutoBSC]", e)
+                console.error("[ChampBot]", e)
               }
             }
           }, 10000);
@@ -285,14 +282,14 @@ function purge(elements) {
 
       if (messageType === "loot_drop" && dropEnabled) {
         if (event.payload.typeId !== lastDropId) {
-          log("Collecting loot drop")
+          log("Collecting Loot Drop")
 
           setTimeout(() => {
             for (let drop of document.getElementsByClassName("LootDropCard")) {
               try {
                 drop.getElementsByClassName("RectangleButton")[0].click()
               } catch (e) {
-                console.error("[AutoBSC]", e)
+                console.error("[ChampBot]", e)
               }
             }
             lastDropId = event.payload.typeId
@@ -302,7 +299,7 @@ function purge(elements) {
 
       if (messageType === "slider" && sliderEnabled) {
         if (event.payload.typeId !== lastSliderId) {
-          log("Collecting slider")
+          log("Collecting Slider")
 
           setTimeout(() => {
             for (let drop of document.getElementsByClassName("SliderQuestionCard")) {
@@ -312,7 +309,7 @@ function purge(elements) {
                 elem.dispatchEvent(new InputEvent("input"))
                 elem.dispatchEvent(new Event("change"))
               } catch (e) {
-                console.error("[AutoBSC]", e)
+                console.error("[ChampBot]", e)
               }
             }
             lastSliderId = event.payload.typeId
@@ -325,7 +322,7 @@ function purge(elements) {
   function setupAutoBsc() {
     loaded = true;
 
-    console.log("[AutoBSC] AutoBSC loaded");
+    console.log("[ChampBot] ChampBot Loaded");
 
     const interval = setInterval(() => {
       const div = document.getElementsByClassName("Feed__content")[0];
@@ -342,23 +339,23 @@ function purge(elements) {
 
     setInterval(() => {
       if (reconnectButtonContainer.style.display !== "none") {
-        console.log("[AutoBSC] Reconnecting");
+        console.log("[ChampBot] Reconnecting");
         reconnectButton.click();
       }
     }, 1000);
 
     document.body.insertAdjacentHTML("afterbegin", `
 <style>
-#autobsc-overlay > details[open] {
+#ChampBot-overlay > details[open] {
    width: 20rem;
 }
 
-.autobsc-config-container {
+.ChampBot-config-container {
     width: 15rem;
     padding-bottom: 0.15rem;
 }
 
-.autobsc-config-container > input[type=checkbox] {
+.ChampBot-config-container > input[type=checkbox] {
     float: right;
     position: relative;
     top: 0.15rem;
@@ -369,66 +366,66 @@ function purge(elements) {
     display: none;
 }
 </style>
-<div id="autobsc-overlay" style="position: absolute; top: 20%; z-index: 99999999; background: antiquewhite">
+<div id="ChampBot-overlay" style="position: absolute; top: 20%; z-index: 99999999; background: antiquewhite">
 <details>
-<summary style="list-style: none;" id="autobsc-overlayheader" onclick="if (getAttribute('drag') === '') event.preventDefault()">
-  <div style="padding: 1rem;">AutoBSC++</div>
+<summary style="list-style: none;" id="ChampBot-overlayheader" onclick="if (getAttribute('drag') === '') event.preventDefault()">
+  <div style="padding: 1rem;">ChampBot</div>
 </summary>
 
 <div style="display: grid; justify-content: center; margin-bottom: .5rem;">
 <div>
   <div style="margin-bottom: .5rem">
     <h1>Data</h1>
-    Connected: <span id="autobsc-connected">unknown</span>
+    Connected: <span id="ChampBot-connected">unknown</span>
   </div>
 
   <div style="margin-bottom: .5rem;">
     <h3>Predictions</h3>
-    Blue: <span id="autobsc-pick-blue">unknown</span><br>
-    Red: <span id="autobsc-pick-red">unknown</span>
+    Blue: <span id="ChampBot-pick-blue">unknown</span><br>
+    Red: <span id="ChampBot-pick-red">unknown</span>
   </div>
 
   <h1>Config</h1>
-  <div class="autobsc-config-container">Autocheer <input type="checkbox" id="autobsc-cheer"></div>
+  <div class="ChampBot-config-container">Autocheer <input type="checkbox" id="ChampBot-cheer"></div>
 
-  <div class="autobsc-config-container">Answer polls <input type="checkbox" id="autobsc-poll"></div>
+  <div class="ChampBot-config-container">Answer polls <input type="checkbox" id="ChampBot-poll"></div>
 
-  <div class="autobsc-config-container">Answer quiz <input type="checkbox" id="autobsc-quiz"></div>
+  <div class="ChampBot-config-container">Answer quiz <input type="checkbox" id="ChampBot-quiz"></div>
 
-  <div class="autobsc-config-container">Answer slider <input type="checkbox" id="autobsc-slider"></div>
+  <div class="ChampBot-config-container">Answer slider <input type="checkbox" id="ChampBot-slider"></div>
 
-  <div class="autobsc-config-container">Collect lootdrop <input type="checkbox" id="autobsc-lootdrop"></div>
+  <div class="ChampBot-config-container">Collect lootdrop <input type="checkbox" id="ChampBot-lootdrop"></div>
 
-  <div class="autobsc-config-container">Autopredict <input type="checkbox" id="autobsc-predict"></div>
+  <div class="ChampBot-config-container">Autopredict <input type="checkbox" id="ChampBot-predict"></div>
 
-  <div class="autobsc-config-container">Autopredict strategy <select style="width: 3.825rem;" id="autobsc-predict-strat">
+  <div class="ChampBot-config-container">Autopredict strategy <select style="width: 3.825rem;" id="ChampBot-predict-strat">
   <option value="1">Blue</option>
   <option value="2">Red</option>
   <option value="rand">Random</option>
   <option value="maj">Follow majority</option>
 </select></div>
 
-  <div class="autobsc-config-container">Feed logging <input type="checkbox" id="autobsc-feedlogging"></div>
-  <div class="autobsc-config-container">Low Detail Mode <input type="checkbox" id="autobsc-lowdetail"></div>
+  <div class="ChampBot-config-container">Feed logging <input type="checkbox" id="ChampBot-feedlogging"></div>
+  <div class="ChampBot-config-container">Low Detail Mode <input type="checkbox" id="ChampBot-lowdetail"></div>
 
-  <button style="background-color: red; border: none; color: white;" onclick='if (confirm("Are you sure? You will only be able to open the overlay again by reloading the page")) document.getElementById("autobsc-overlay").remove()'>Destroy overlay</button>
+  <button style="background-color: red; border: none; color: white;" onclick='if (confirm("Are you sure? You will only be able to open the overlay again by reloading the page")) document.getElementById("ChampBot-overlay").remove()'>Destroy overlay</button>
 
 </div>
 </div>
 </details></div>
     `)
-    dragElement(document.getElementById("autobsc-overlay"))
+    dragElement(document.getElementById("ChampBot-overlay"))
 
     const elems = {
-      cheer: document.getElementById("autobsc-cheer"),
-      poll: document.getElementById("autobsc-poll"),
-      quiz: document.getElementById("autobsc-quiz"),
-      slider: document.getElementById("autobsc-slider"),
-      lootdrop: document.getElementById("autobsc-lootdrop"),
-      predict: document.getElementById("autobsc-predict"),
-      predictstrat: document.getElementById("autobsc-predict-strat"),
-      feedlogging: document.getElementById("autobsc-feedlogging"),
-      lowdetail: document.getElementById("autobsc-lowdetail")
+      cheer: document.getElementById("ChampBot-cheer"),
+      poll: document.getElementById("ChampBot-poll"),
+      quiz: document.getElementById("ChampBot-quiz"),
+      slider: document.getElementById("ChampBot-slider"),
+      lootdrop: document.getElementById("ChampBot-lootdrop"),
+      predict: document.getElementById("ChampBot-predict"),
+      predictstrat: document.getElementById("ChampBot-predict-strat"),
+      feedlogging: document.getElementById("ChampBot-feedlogging"),
+      lowdetail: document.getElementById("ChampBot-lowdetail")
     }
 
     elems.cheer.checked = cheerEnabled
@@ -487,9 +484,9 @@ function purge(elements) {
         purge(document.getElementsByClassName("Cheer__canvas"))
     }
 
-    conn = document.getElementById("autobsc-connected")
-    matchpredblue = document.getElementById("autobsc-pick-blue")
-    matchpredred = document.getElementById("autobsc-pick-red")
+    conn = document.getElementById("ChampBot-connected")
+    matchpredblue = document.getElementById("ChampBot-pick-blue")
+    matchpredred = document.getElementById("ChampBot-pick-red")
   }
 
   const loadedMessageHtml = `<div data-v-3dcc93da="" data-v-8a7cf7d7="" class="Container Container--extraTopMargin" style="translate: none; rotate: none; scale: none; transform: translate(0px);">
@@ -505,8 +502,8 @@ function purge(elements) {
                         </div>
                         <div data-v-8a7cf7d7="" class="RewardCard__infoContainer">
                             <div data-v-8a7cf7d7="" class="RewardCard__textContainer">
-                                <div data-v-8a7cf7d7="" class="RewardCard__textContainer__title">AutoBSC++ loaded</div>
-                                <div data-v-8a7cf7d7="" class="RewardCard__textContainer__subTitle">made by laptopcat (based on AutoBSC by catme0w)</div>
+                                <div data-v-8a7cf7d7="" class="RewardCard__textContainer__title">ChampBot Loaded</div>
+                                <div data-v-8a7cf7d7="" class="RewardCard__textContainer__subTitle">By Kxroleek</div>
                             </div>
                         </div>
                     </div>
