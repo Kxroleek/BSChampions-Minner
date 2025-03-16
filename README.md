@@ -54,7 +54,6 @@ Wyłącza grafikę cheer w celu poprawienia wydajności na słabszym sprzęcie. 
 
 ## Znane problemy
 - Cheers nie są wysyłane, jeśli nie wybrano emotki cheer
-- Brak wsparcia dla interakcji slidera
 
 ## Licencja
 
