@@ -5,7 +5,7 @@
 // @supportURL   https://e-z.bio/kxroleek
 // @license      MIT
 // @version      0.2.2
-// @description  Automation tool that helps earn points in the Brawl Stars Championship on the Supercell website by completing live event tasks.
+// @description  Automation tool that helps earn points in the Brawl Stars Championship on the Supercell website by completing live event tasks
 // @author       Kxroleek
 // @match        https://event.supercell.com/brawlstars/*
 // @icon         https://event.supercell.com/brawlstars/page-icon.ico
