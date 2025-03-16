@@ -10,7 +10,7 @@ Testowane na Brawl Stars Championship (listopad 2024), ale powinno działać ró
 
 1. Zainstaluj [Tampermonkey](https://www.tampermonkey.net/).
 
-2. Zainstaluj AutoBSC klikając [tutaj](https://github.com/Kxroleek/ChampBot/raw/main/ChampBot.user.js).
+2. Zainstaluj ChampBot klikając [tutaj](https://github.com/Kxroleek/ChampBot/raw/main/ChampBot.user.js).
 
 3. Otwórz stronę streama na https://event.supercell.com/brawlstars/pl
 
