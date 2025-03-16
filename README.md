@@ -1,60 +1,62 @@
 # ChampBot
 
-Chcesz zdobyć wszystkie Starr Drops, Emotki i Monety, ale nie masz czasu na oglądanie streamów, albo streamy są nadawane w innych strefach czasowych?
+Chcesz zdobywać wszystkie Starr Dropy, Spray'e i Monety, ale nie masz czasu na oglądanie streama lub po prostu nie pasuje Ci strefa czasowa? ChampBot jest tu, by Ci pomóc!
 
-ChampBot może automatycznie wykonywać działania podczas streamów, takie jak Cheers, Ankiety (wybór MVP), Quizy, Loot Drops oraz Przewidywania Meczu.
+ChampBot może automatycznie wykonywać wydarzenia podczas streama, w tym Cheers, Polls (wybieranie MVP), Quizy, Loot Drops i Prognozy Meczowe.
 
-Przetestowano podczas Last Chance Qualifier (Sierpień 2024), ale powinien działać także na innych streamach mistrzostw.
+Testowane na Brawl Stars Championship (listopad 2024), ale powinno działać również na innych streamach Championship.
 
 ## Szybki Start
 
 1. Zainstaluj [Tampermonkey](https://www.tampermonkey.net/).
 
-2. Zainstaluj ChampBot, klikając [Tutaj](https://github.com/Kxroleek/BSChampions-Minner/raw/main/ChampBot.user.js).
+2. Zainstaluj AutoBSC klikając [tutaj](https://github.com/Kxroleek/ChampBot/raw/main/ChampBot.user.js).
 
-3. Otwórz stronę streamu na https://event.supercell.com/brawlstars/
+3. Otwórz stronę streama na https://event.supercell.com/brawlstars/pl
 
-4. Jeśli w logach wydarzeń pojawi się komunikat "ChampBot Loaded", to znaczy, że działa. Teraz wystarczy, że zostawisz otwartą kartę, a resztę zrobi za Ciebie.
+4. Jeśli w logach wydarzeń pojawi się komunikat „ChampBot loaded”, to oznacza, że działa. Teraz wystarczy, że pozostawisz zakładkę otwartą i pozwolisz mu wykonać całą pracę za Ciebie.
 
-## Różnice względem AutoBSC
-Projekt bazuje na [AutoBSC](https://github.com/CatMe0w/AutoBSC), ale posiada wiele różnic:
+## Różnice w porównaniu do AutoBSC
+Ten projekt jest oparty na [AutoBSC](https://github.com/CatMe0w/AutoBSC), ale ma wiele różnic:
 
-- ChampBot posiada nakładkę z danymi i możliwością szybkiej konfiguracji skryptu
+- ChampBot ma nakładkę wyświetlającą dane i umożliwiającą szybką konfigurację skryptu
 - Quizy są zawsze odpowiadane poprawnie
-- Różne opcje autoprzewidywania: zawsze niebieski/czerwony, losowa drużyna albo wybór zgodny z większością
-- Automatyczne zbieranie dropów z lootem
-- Interakcje oparte na DOM (zapewniają działanie takich rzeczy jak wyświetlanie punktów)
-- Logowanie wydarzeń, takich jak cheer, przewidywanie lub ankiety, w kanale po prawej stronie ekranu
+- Wiele różnych sposobów autopredykcji: zawsze niebieski/czerwony, losowy zespół lub wybór zgodnie z większością
+- Automatyczne zbieranie loot dropów
+- Interakcje oparte na DOM (zapewnia, że takie rzeczy jak wyświetlanie punktów zawsze działają)
+- Logowanie wydarzeń, takich jak wysyłanie cheerów, prognoz czy głosowań, które mogą być wyświetlane w panelu po prawej stronie ekranu
 
 ## Nakładka
 Nakładka ma dwie sekcje:
 ### Dane
-Wyświetla, ilu użytkowników (Rzekomo*) jest podłączonych i ile przewidywań wykonano dla każdej z drużyn.
+Ta sekcja wyświetla liczbę (rzekomo*) użytkowników, którzy są połączeni, oraz liczbę prognoz dla każdego zespołu.
 
-> \* Nie jestem pewien, czy dane są prawidłowe, ale są wysyłane w wiadomości cheer z serwera
+> \* Nie wiem, czy te dane są poprawne, ale są one wysyłane w wiadomości cheer z serwera.
 
 ### Konfiguracja
-Pozwala skonfigurować skrypt za pomocą GUI
+Pozwala skonfigurować skrypt za pomocą GUI:
 - Autocheer:
-Automatycznie wysyła emotki cheer (emotki w dolnych rogach ekranu), by zdobyć 5 punktów. Włączone domyślnie
-- Odpowiedź na ankiety:
-Automatycznie odpowiada na ankiety "Kto był MVP tego meczu?", by zdobyć 100 punktów. Włączone domyślnie
-- Odpowiedź na quiz:
-Automatycznie podaje prawidłową odpowiedź na quizy, takie jak "Czego używa Melodie jako broni?", by zdobyć 50 punktów. Włączone domyślnie
-- Zbieraj lootdrop:
-Automatycznie zbiera losowe dropy, aby zdobyć 10 punktów. Włączone domyślnie
-- Autoprzewidywanie:
-Automatycznie ustawia przewidywania, by zdobyć 10 punktów (125, jeśli przewidywanie okaże się prawdziwe). Wyłączone domyślnie
-- - Strategia autoprzewidywania:
-Strategia wyboru drużyny do autoprzewidywania. Może to być Blue (zawsze wybieraj niebieską), Red (zawsze wybieraj czerwoną), Random (wybór losowy) lub Follow majority (wybierz zgodnie z większością). Domyślnie ustawione na Follow majority
-- Logowanie do kanału:
-Loguje wydarzenia (wysyłanie cheer, ankiety, quizy, itd.) do kanału po prawej stronie ekranu. Włączone domyślnie
+Automatycznie wysyłaj cheer (emoji w dolnych rogach streama), aby zdobyć 5 punktów. Włączone domyślnie
+- Odpowiedzi na ankiety:
+Automatycznie odpowiadaj na ankiety „Kto był MVP tego meczu?” aby zdobyć 100 punktów. Włączone domyślnie
+- Odpowiedzi na quizy:
+Automatycznie udzielaj poprawnych odpowiedzi na quizy, takie jak „Jaką broń używa Melodie?” aby zdobyć 50 punktów. Włączone domyślnie
+- Odpowiedzi na suwaki:
+Automatycznie przesuwaj interaktywne suwaki, aby zdobyć 2 punkty. Włączone domyślnie
+- Zbieranie lootdropów:
+Automatycznie zbieraj losowe loot dropy, aby zdobyć 10 punktów. Włączone domyślnie
+- Autopredykcja:
+Automatycznie składaj prognozy, aby zdobyć 10 punktów (125, jeśli prognoza okaże się trafna). Wyłączone domyślnie
+- - Strategia autopredykcji:
+Strategia używana do wyboru zespołu w autopredykcji. Może to być Niebieski (zawsze wybieraj niebieski), Czerwony (zawsze wybieraj czerwony), Losowy (losowo wybieraj) lub Podążaj za większością (wybierz ten sam zespół, co większość). Domyślnie: Podążaj za większością
+- Logowanie w feedzie:
+Logowanie wydarzeń (wysyłanie cheerów, prognozy, quizy itp.) w feedzie po prawej stronie ekranu. Włączone domyślnie
 - Tryb niskiej szczegółowości:
-Wyłącza grafikę cheer w celu poprawienia wydajności na słabszym sprzęcie. Wyłączone domyślnie
+Wyłączenie grafiki cheerów, aby poprawić wydajność na słabszym sprzęcie. Wyłączone domyślnie
 
 ## Znane problemy
-- Cheers nie są wysyłane, jeśli nie wybrano emotki cheer
+- Cheery nie są wysyłane, jeśli nie wybrano Emoji Cheer
 
 ## Licencja
 
-Licencja MIT
+MIT License
