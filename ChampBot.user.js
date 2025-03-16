@@ -346,73 +346,127 @@ function purge(elements) {
 
     document.body.insertAdjacentHTML("afterbegin", `
 <style>
-#ChampBot-overlay > details[open] {
-   width: 20rem;
+#ChampBot-overlay {
+    position: absolute;
+    top: 20%;
+    z-index: 99999999;
+    background: #000000;
+    color: #ffffff;
+    border: 3px solid #ffd700;
+    border-radius: 15px;
+    font-family: 'Orbitron', sans-serif;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    padding: 1rem;
+    transition: all 0.3s ease-in-out;
+    display: none;
+}
+
+#ChampBot-overlay[open] {
+    display: block;
+}
+
+#ChampBot-toggle {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: #ffd700;
+    color: black;
+    font-weight: bold;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 1.5rem;
+}
+
+#ChampBot-toggle:hover {
+    background: #caa000;
+}
+
+#ChampBot-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+#ChampBot-close:hover {
+    background: darkred;
 }
 
 .ChampBot-config-container {
-    width: 15rem;
-    padding-bottom: 0.15rem;
+    width: 20rem;
+    padding: 0.5rem;
+    background: rgba(255, 215, 0, 0.1);
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
 }
 
 .ChampBot-config-container > input[type=checkbox] {
     float: right;
-    position: relative;
-    top: 0.15rem;
 }
 
-.Video__InteractionBlocker, .VideoCover.VideoCover--hidden {
-    all: unset !important;
-    display: none;
+button {
+    background: #ffd700;
+    color: black;
+    font-weight: bold;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #caa000;
 }
 </style>
-<div id="ChampBot-overlay" style="position: absolute; top: 20%; z-index: 99999999; background: antiquewhite">
-<details>
-<summary style="list-style: none;" id="ChampBot-overlayheader" onclick="if (getAttribute('drag') === '') event.preventDefault()">
-  <div style="padding: 1rem;">ChampBot</div>
-</summary>
 
-<div style="display: grid; justify-content: center; margin-bottom: .5rem;">
-<div>
-  <div style="margin-bottom: .5rem">
-    <h1>Data</h1>
-    Connected: <span id="ChampBot-connected">unknown</span>
+<button id="ChampBot-toggle" onclick="document.getElementById('ChampBot-overlay').style.display='block'">ChampBot</button>
+
+<div id="ChampBot-overlay">
+  <button id="ChampBot-close" onclick="document.getElementById('ChampBot-overlay').style.display='none'">X</button>
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <div style="text-align: center; margin-bottom: .5rem">
+      <h2>🔗 Status</h2>
+      Connected: <span id="ChampBot-connected" style="color: #ffd700;">unknown</span>
+    </div>
+
+    <div style="text-align: center; margin-bottom: .5rem;">
+      <h3>🔮 Predictions</h3>
+      Blue: <span id="ChampBot-pick-blue" style="color: blue;">unknown</span><br>
+      Red: <span id="ChampBot-pick-red" style="color: red;">unknown</span>
+    </div>
+
+    <h2>⚙️ Config</h2>
+    <div class="ChampBot-config-container">Autocheer <input type="checkbox" id="ChampBot-cheer"></div>
+    <div class="ChampBot-config-container">Answer polls <input type="checkbox" id="ChampBot-poll"></div>
+    <div class="ChampBot-config-container">Answer quiz <input type="checkbox" id="ChampBot-quiz"></div>
+    <div class="ChampBot-config-container">Answer slider <input type="checkbox" id="ChampBot-slider"></div>
+    <div class="ChampBot-config-container">Collect lootdrop <input type="checkbox" id="ChampBot-lootdrop"></div>
+    <div class="ChampBot-config-container">Autopredict <input type="checkbox" id="ChampBot-predict"></div>
+    <div class="ChampBot-config-container">Autopredict strategy 
+      <select id="ChampBot-predict-strat">
+        <option value="1">Blue</option>
+        <option value="2">Red</option>
+        <option value="rand">Random</option>
+        <option value="maj">Follow majority</option>
+      </select>
+    </div>
+    <div class="ChampBot-config-container">Feed logging <input type="checkbox" id="ChampBot-feedlogging"></div>
+    <div class="ChampBot-config-container">Low Detail Mode <input type="checkbox" id="ChampBot-lowdetail"></div>
+
+    <button onclick="if (confirm('Are you sure? Reload page to restore overlay.')) document.getElementById('ChampBot-overlay').remove()">Destroy overlay</button>
   </div>
-
-  <div style="margin-bottom: .5rem;">
-    <h3>Predictions</h3>
-    Blue: <span id="ChampBot-pick-blue">unknown</span><br>
-    Red: <span id="ChampBot-pick-red">unknown</span>
-  </div>
-
-  <h1>Config</h1>
-  <div class="ChampBot-config-container">Autocheer <input type="checkbox" id="ChampBot-cheer"></div>
-
-  <div class="ChampBot-config-container">Answer polls <input type="checkbox" id="ChampBot-poll"></div>
-
-  <div class="ChampBot-config-container">Answer quiz <input type="checkbox" id="ChampBot-quiz"></div>
-
-  <div class="ChampBot-config-container">Answer slider <input type="checkbox" id="ChampBot-slider"></div>
-
-  <div class="ChampBot-config-container">Collect lootdrop <input type="checkbox" id="ChampBot-lootdrop"></div>
-
-  <div class="ChampBot-config-container">Autopredict <input type="checkbox" id="ChampBot-predict"></div>
-
-  <div class="ChampBot-config-container">Autopredict strategy <select style="width: 3.825rem;" id="ChampBot-predict-strat">
-  <option value="1">Blue</option>
-  <option value="2">Red</option>
-  <option value="rand">Random</option>
-  <option value="maj">Follow majority</option>
-</select></div>
-
-  <div class="ChampBot-config-container">Feed logging <input type="checkbox" id="ChampBot-feedlogging"></div>
-  <div class="ChampBot-config-container">Low Detail Mode <input type="checkbox" id="ChampBot-lowdetail"></div>
-
-  <button style="background-color: red; border: none; color: white;" onclick='if (confirm("Are you sure? You will only be able to open the overlay again by reloading the page")) document.getElementById("ChampBot-overlay").remove()'>Destroy overlay</button>
-
 </div>
-</div>
-</details></div>
     `)
     dragElement(document.getElementById("ChampBot-overlay"))
 
