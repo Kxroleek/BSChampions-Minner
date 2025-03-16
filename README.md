@@ -10,7 +10,7 @@ Przetestowano podczas Last Chance Qualifier (Sierpień 2024), ale powinien dzia�
 
 1. Zainstaluj [Tampermonkey](https://www.tampermonkey.net/).
 
-2. Zainstaluj ChampBot, klikając [Tutaj](https://github.com/Kxroleek/BSChampions-Minner/raw/main/BSChampions-Minner.user.js).
+2. Zainstaluj ChampBot, klikając [Tutaj](https://github.com/Kxroleek/BSChampions-Minner/raw/main/ChampBot.user.js).
 
 3. Otwórz stronę streamu na https://event.supercell.com/brawlstars/
 
